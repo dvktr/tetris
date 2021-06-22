@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tetris</title>
+    <link rel="stylesheet" href="./public/css/tetris.css" />
+  </head>
+  
+  <body>
+    <img src="./public/images/Triangulos HUB.png" alt="" id="triangulos" />
+    <img src="./public/images/barras.png" alt="" id="barras" />
+
+    <div class="container">
+      <canvas
+        id="tela"
+        width="200"
+        height="400"
+        class="tela"
+        style="border: 20px ridge #341290"
+      ></canvas>
+
+      <div class="esquerda">
+        <canvas
+          id="prox-peca"
+          style="border: 20px ridge #341290"
+          height="220"
+          width="120"
+        ></canvas>
+        <div
+          class="score"
+          style="
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            font-family: monospace;
+          "
+        >
+          Score:
+          <div
+            id="score"
+            style="display: inline-block; color: #fff; font-family: monospace"
+          >
+            0
+          </div>
+        </div>
+        <div
+          class="score"
+          style="
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            font-family: monospace;
+          "
+        >
+          Linhas:
+          <div id="linhas" style="display: inline-block">0</div>
+        </div>
+        <div
+          class="score"
+          style="
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            font-family: monospace;
+          "
+        >
+          Nível:
+          <div id="nivel" style="display: inline-block">0</div>
+        </div>
+      </div>
+      <div>
+        <audio id="trilhasonora">
+          <source
+            src="./public/sounds/trilhasonora.mp3"
+            type="audio/mpeg"
+            loop
+            autoplay
+          />
+        </audio>
+
+        <audio id="trilhaSonoraMorte">
+          <source
+            src="./public/sounds/trilhaSonoraMorte.mp3"
+            type="audio/mpeg"
+            loop
+            autoplay
+          />
+        </audio>
+        <img
+          id="btnMusic"
+          src="./public/images/icon-music.svg"
+          style="display: flex; padding: 5px; cursor: pointer"
+          onclick="playPause()"
+        />
+
+        <audio id="pecaMovimento">
+          <source
+            src="./public/sounds/pecaMovimento.mp3"
+            type="audio/mpeg"
+            loop
+            autoplay
+          />
+        </audio>
+
+        <audio id="travamentoDaPeca">
+          <source
+            src="./public/sounds/travamentoDaPeca.mp3"
+            type="audio/mpeg"
+            loop
+            autoplay
+          />
+        </audio>
+
+        <audio id="eliminacaoLinha">
+          <source
+            src="./public/sounds/eliminacaoLinha.mp3"
+            type="audio/mpeg"
+            loop
+            autoplay
+          />
+        </audio>
+        <img
+          id="btnSound"
+          src="./public/images/icon-sound.svg"
+          style="display: flex; padding: 5px; cursor: pointer"
+          onclick="ativarSound()"
+        />
+      </div>
+
+      <div class="bg-config" id="config">
+        <div class="config">
+          <h1>VOCÊ PERDEU!</h1>
+          <section class="doisplacar">
+            <div class="placar">
+              <section class="separa-placar">
+                <h2>PEÇAS</h2>
+              </section>
+
+              <section class="separa-placar">
+                <h4 style="color: yellow">Z</h4>
+                <h4 style="color: white" id="qntdZ">0</h4>
+              </section>
+
+              <section class="separa-placar">
+                <h4 style="color: purple">S</h4>
+                <h4 style="color: white" id="qntdS">0</h4>
+              </section>
+
+              <section class="separa-placar">
+                <h4 style="color: red">T</h4>
+                <h4 style="color: white" id="qntdT">0</h4>
+              </section>
+
+              <section class="separa-placar">
+                <h4 style="color: blue">O</h4>
+                <h4 style="color: white" id="qntdO">0</h4>
+              </section>
+
+              <section class="separa-placar">
+                <h4 style="color: green">L</h4>
+                <h4 style="color: white" id="qntdL">0</h4>
+              </section>
+
+              <section class="separa-placar">
+                <h4 style="color: orange">I</h4>
+                <h4 style="color: white" id="qntdI">0</h4>
+              </section>
+
+              <section class="separa-placar">
+                <h4 style="color: pink">J</h4>
+                <h4 style="color: white" id="qntdJ">0</h4>
+              </section>
+            </div>
+
+            <div class="placar">
+              <section class="separa-placar">
+                <h2>LINHA:</h2>
+                <h2 id="linhas2">0</h2>
+              </section>
+
+              <section class="separa-placar">
+                <h2>NÍVEL:</h2>
+                <h2 id="nivel2">0</h2>
+              </section>
+
+              <section class="separa-placar">
+                <h2>SCORE:</h2>
+                <h2 id="score2">0</h2>
+              </section>
+
+              <section class="separa-placar">
+                <h2>Linhas Totais:</h2>
+                <h2 id="linhastotais">0</h2>
+              </section>
+            </div>
+
+            <div class="placar">
+              <section class="separa-placar">
+                <h2>RANKING</h2>
+              </section>
+
+              <section class="separa-placar">
+                <h2>1.</h2>
+                <h2 id="ranking0"></h2>
+                <h2 id="scoreR0"></h2>
+              </section>
+
+              <section class="separa-placar">
+                <h2>2.</h2>
+                <h2 id="ranking1"></h2>
+                <h2 id="scoreR1"></h2>
+              </section>
+
+              <section class="separa-placar">
+                <h2>3.</h2>
+                <h2 id="ranking2"></h2>
+                <h2 id="scoreR2"></h2>
+              </section>
+
+              <section class="separa-placar">
+                <h2>4.</h2>
+                <h2 id="ranking3"></h2>
+                <h2 id="scoreR3"></h2>
+              </section>
+
+              <section class="separa-placar">
+                <h2>5.</h2>
+                <h2 id="ranking4"></h2>
+                <h2 id="scoreR4"></h2>
+              </section>
+            </div>
+          </section>
+
+          <img
+            class="close"
+            onclick="reiniciarJogo()"
+            src="./public/images/config_salvar.png"
+            alt="Salvar Configurações"
+            style="height: 10%"
+          />
+        </div>
+      </div>
+
+    </div>
+    <ul class="squares"></ul>
+    <script src="public/scripts/tetris.js"></script>
+  </body>
+</html>

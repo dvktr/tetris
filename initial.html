@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tetris | Zenite</title>
+    <link rel="stylesheet" href="./public/css/initial.css" />
+    <link rel="icon" href="./public/images/icon.png" />
+  </head>
+  <body>
+    <img src="./public/images/Triangulos HUB.png" alt="" id="triangulos" />
+    <img src="./public/images/barras.png" alt="" id="barras" />
+
+    <script>
+
+      function abrirConfig() {
+        document.getElementById('config').style.top = "0";
+      }
+
+      function fecharConfig() {
+        document.getElementById('config').style.top = "-100%";
+      }
+
+    </script>
+
+    <section class="form-section">
+      <img src="./public/images/LOGO.png" alt="" id="zenite-logo" />
+
+      <div class="form-wrapper">
+        <form class="formulario">
+
+          <div class="input-block" style="display: none;">
+            <label for="login-email">Seu nome</label>
+            <input type="text" id="nickname" placeholder="nickname" />
+          </div>
+
+          <button
+            type="submit"
+            class="btn-login"
+            id="btn-login"
+            onclick="capturar()"
+          >
+            UM JOGADOR
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <ul class="squares">
+    </ul>
+
+
+    <script src="./public/scripts/initial.js"></script>
+  </body>
+</html>
